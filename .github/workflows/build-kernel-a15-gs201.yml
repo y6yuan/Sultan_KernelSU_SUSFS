@@ -79,7 +79,7 @@ jobs:
 
           cd ./KernelSU
           
-          echo "Applying next SUSFS patches..."
+          echo "Applying SUSFS patches..."
           patch -p1 --forward < 10_enable_susfs_for_ksu.patch || true
 
           echo "Applying mksu_susfs.patch"
