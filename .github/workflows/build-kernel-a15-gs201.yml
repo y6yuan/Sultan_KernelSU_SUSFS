@@ -90,13 +90,13 @@ jobs:
           cd ..
           patch -p1 < 50_add_susfs_in_gki-android13-5.10.patch || true
 
-      - name: Apply KSU Hooks
-        run: |
-          echo "Changing to configuration directory: $CONFIG..."
-          cd "$CONFIG"
-          # Apply additional patch
-          cp ../kernel_patches/ksu_hooks.patch ./
-          patch -p1 --fuzz=3 < ./ksu_hooks.patch
+      #- name: Apply KSU Hooks
+      #  run: |
+      #    echo "Changing to configuration directory: $CONFIG..."
+      #    cd "$CONFIG"
+      #    # Apply additional patch
+      #    cp ../kernel_patches/ksu_hooks.patch ./
+      #    patch -p1 --fuzz=3 < ./ksu_hooks.patch
 
       - name: Apply Hide Stuff Patches
         run: |
@@ -148,7 +148,7 @@ jobs:
           echo "CONFIG_KSU_SUSFS_HIDE_KSU_SUSFS_SYMBOLS=y" >> ./arch/arm64/configs/gs201_defconfig
           echo "CONFIG_KSU_SUSFS_SPOOF_CMDLINE_OR_BOOTCONFIG=y" >> ./arch/arm64/configs/gs201_defconfig
           echo "CONFIG_KSU_SUSFS_OPEN_REDIRECT=y" >> ./arch/arm64/configs/gs201_defconfig
-          echo "CONFIG_KSU_SUSFS_SUS_SU=n" >> ./arch/arm64/configs/gs201_defconfig
+          echo "CONFIG_KSU_SUSFS_SUS_SU=y" >> ./arch/arm64/configs/gs201_defconfig
           
           # Add additional tmpfs config setting
           echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/gs201_defconfig
