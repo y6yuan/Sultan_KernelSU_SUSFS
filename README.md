@@ -37,6 +37,7 @@ Follow the steps for GKI:
 [Installation](https://kernelsu.org/guide/installation.html)
 
 To get boot.img format:  
+[Telegram Bot](https://t.me/wildpluskernel/22076)  
 [Get MyKernel Format](https://github.com/TheWildJames/Get_My_Kernel_Format)
 
 ---
@@ -92,6 +93,7 @@ This helps me alot! <3
 [simonpunk](https://gitlab.com/simonpunk/susfs4ksu.git) - Created SUSFS!  
 [sidex15](https://github.com/sidex15) - Created module!  
 [backslashxx](https://github.com/backslashxx) - Helped with patches!  
-[幕落](https://github.com/MuLuo688) - Donation!  
+[Teemo](https://github.com/liqideqq) - Helped with patches!  
+[幕落](https://github.com/MuLuo688) - Donation!
 
 If you have contributed and are not here please remind me!
