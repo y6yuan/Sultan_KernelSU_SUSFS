@@ -79,7 +79,7 @@ jobs:
           echo "Applying mksu_susfs.patch"
           cp ../../kernel_patches/mksu_susfs.patch ../KernelSU/
           patch -p1 < mksu_susfs.patch
-          cp ../../kernel_patches/fix.patch ./KernelSU/
+          cp ../../kernel_patches/fix.patch ../KernelSU/
           patch -p1 < fix.patch
           
           # Change to common directory and apply SUSFS patch
