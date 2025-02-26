@@ -56,7 +56,7 @@ jobs:
           cd "$CONFIG"
           
           echo "Adding KernelSU..."
-          curl -LSs "https://raw.githubusercontent.com/rifsxd/KernelSU-Next/next/kernel/setup.sh" | bash -
+          curl -LSs "https://raw.githubusercontent.com/KernelSU-Next/KernelSU-Next/next/kernel/setup.sh" | bash -
 
       - name: Apply SUSFS Patches
         run: |
@@ -66,36 +66,45 @@ jobs:
           echo "Applying SUSFS patches..."
           
           # Copy SUSFS patches
-          cp ../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU-Next/
           cp ../susfs4ksu/kernel_patches/50_add_susfs_in_gki-android13-5.10.patch ./
           cp ../susfs4ksu/kernel_patches/fs/* ./fs/
           cp ../susfs4ksu/kernel_patches/include/linux/* ./include/linux/
 
+          #cp ../susfs4ksu/kernel_patches/KernelSU/10_enable_susfs_for_ksu.patch ./KernelSU-Next/
+
           cd ./KernelSU-Next
           
           echo "Applying next SUSFS patches..."
-          cp ../../kernel_patches/KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch ./
-          patch -p1 --forward < KernelSU-Next-Implement-SUSFS-v1.5.5-Universal.patch || true
+          cp ../kernel_patches/0001-kernel-patch-susfs-v1.5.5-to-KernelSU-Next-v1.0.5.patch ./
+          patch -p1 --forward < 0001-kernel-patch-susfs-v1.5.5-to-KernelSU-Next-v1.0.5.patch || true
           
           # Change to common directory and apply SUSFS patch
           cd ..
           patch -p1 < 50_add_susfs_in_gki-android13-5.10.patch || true
 
-      - name: Apply KSU Hooks
-        run: |
-          echo "Changing to configuration directory: $CONFIG..."
-          cd "$CONFIG"
-          # Apply additional patch
-          cp ../kernel_patches/ksu_hooks.patch ./
-          patch -p1 --fuzz=3 < ./ksu_hooks.patch
+      #- name: Apply KSU Hooks
+      #  run: |
+      #    echo "Changing to configuration directory: $CONFIG..."
+      #    cd "$CONFIG"
+      #    # Apply additional patch
+      #    cp ../kernel_patches/ksu_hooks.patch ./
+      #    patch -p1 --fuzz=3 < ./ksu_hooks.patch
 
       - name: Apply Hide Stuff Patches
         run: |
           echo "Changing to configuration directory: $CONFIG..."
           cd "$CONFIG"
           # Apply additional patch
-          cp ../kernel_patches/69_hide_stuff.patch ./
-          patch -p1 -F 3 < 69_hide_stuff.patch
+          cp ../kernel_patches/new_hooks.patch ./
+          patch -p1 -F 3 < new_hooks.patch
+
+      #- name: Apply Hide Stuff Patches
+      #  run: |
+      #    echo "Changing to configuration directory: $CONFIG..."
+      #    cd "$CONFIG"
+      #    # Apply additional patch
+      #    cp ../kernel_patches/69_hide_stuff.patch ./
+      #    patch -p1 -F 3 < 69_hide_stuff.patch
 
       - name: Apply KernelSU & SUSFS SUltan Fixes
         run: |
@@ -143,6 +152,12 @@ jobs:
           
           # Add additional tmpfs config setting
           echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/gs201_defconfig
+          echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./arch/arm64/configs/gs201_defconfig
+
+          # Add additional tmpfs config setting
+          echo "CONFIG_IP_NF_TARGET_TTL=y" >> ./arch/arm64/configs/gs201_defconfig
+          echo "CONFIG_IP6_NF_TARGET_HL=y" >> ./arch/arm64/configs/gs201_defconfig
+          echo "CONFIG_IP6_NF_MATCH_HL=y" >> ./arch/arm64/configs/gs201_defconfig
 
       - name: Run sed and perl Commands
         run: |
