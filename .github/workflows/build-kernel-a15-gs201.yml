@@ -148,12 +148,12 @@ jobs:
           
           # Add additional tmpfs config setting
           echo "CONFIG_TMPFS_XATTR=y" >> ./arch/arm64/configs/gs201_defconfig
-          echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./arch/arm64/configs/gs201_defconfig
+          #echo "CONFIG_TMPFS_POSIX_ACL=y" >> ./arch/arm64/configs/gs201_defconfig
 
-          # Add additional tmpfs config setting
-          echo "CONFIG_IP_NF_TARGET_TTL=y" >> ./arch/arm64/configs/gs201_defconfig
-          echo "CONFIG_IP6_NF_TARGET_HL=y" >> ./arch/arm64/configs/gs201_defconfig
-          echo "CONFIG_IP6_NF_MATCH_HL=y" >> ./arch/arm64/configs/gs201_defconfig
+          ## Add additional tmpfs config setting
+          #echo "CONFIG_IP_NF_TARGET_TTL=y" >> ./arch/arm64/configs/gs201_defconfig
+          #echo "CONFIG_IP6_NF_TARGET_HL=y" >> ./arch/arm64/configs/gs201_defconfig
+          #echo "CONFIG_IP6_NF_MATCH_HL=y" >> ./arch/arm64/configs/gs201_defconfig
 
       - name: Run sed and perl Commands
         run: |
